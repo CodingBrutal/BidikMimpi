@@ -1,30 +1,19 @@
-package com.example.bidikmimpi
+package com.example.bidikmimpi.screen
 
-import android.media.Image
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.paddingFrom
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,42 +24,38 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
+import com.example.bidikmimpi.R
 import androidx.compose.runtime.*
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.colorspace.WhitePoint
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
-import com.example.bidikmimpi.ui.theme.blue1
-import com.example.bidikmimpi.ui.theme.blue2
 import com.example.bidikmimpi.ui.theme.blue3
 
-class registerActivity : ComponentActivity() {
+class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             BidikmimpiTheme {
-                RegisterScreen()
+                LoginScreen()
             }
         }
     }
 }
 
 @Composable
-fun RegisterScreen(
-    onRegisterClick: () -> Unit = {},
-    onTextClick: () -> Unit = {}
+fun LoginScreen(
+    onLoginClick: () -> Unit = {},
+    onTextNowClick: () -> Unit = {}
 ) {
-
+    // State untuk menyimpan input pengguna
     var email by remember { mutableStateOf("") }
-    var name by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val passwordVisibility by remember { mutableStateOf(false) }
+    //val context = LocalContext.current
+
+
+
 
     Column(
         modifier = Modifier
@@ -94,9 +79,9 @@ fun RegisterScreen(
             ),
             modifier = Modifier
                 .padding(horizontal = 40.dp)
-                .padding(bottom = 150.dp, top = 0.dp)
+                .padding(bottom = 180.dp, top = 0.dp)
                 .fillMaxWidth()
-        ) {
+        )  {
             // Layout tampilan login
             Column(
                 modifier = Modifier
@@ -106,7 +91,7 @@ fun RegisterScreen(
 
                 ) {
                 Text(
-                    text = "Register",
+                    text = "Login",
                     style = MaterialTheme.typography.headlineLarge.copy(
                         fontWeight = FontWeight.Bold,
                         color = blue3
@@ -136,38 +121,19 @@ fun RegisterScreen(
                     shape = RoundedCornerShape(12.dp)
 
                 )
-                OutlinedTextField(
-                    value = name,
-                    onValueChange = { name = it },
-                    placeholder = { Text("name", color = Color.LightGray) },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Filled.Person,
-                            contentDescription = "email",
-                            tint = Color.LightGray
-                        )
-                    },
-                    modifier = Modifier
-                        .padding(bottom = 15.dp)
-                        .border(
-                            width = 2.dp,
-                            color = Color.LightGray,
-                            shape = RoundedCornerShape(12.dp)
-                        ),
-                    shape = RoundedCornerShape(12.dp)
 
-                )
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
-                    placeholder = { Text("Password", color = Color.LightGray) },
+                    placeholder = { Text("password", color = Color.LightGray) },
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Filled.Lock,
-                            contentDescription = "email",
+                            contentDescription = "lock",
                             tint = Color.LightGray
                         )
                     },
+
                     modifier = Modifier
                         .padding(bottom = 15.dp)
                         .border(
@@ -175,15 +141,32 @@ fun RegisterScreen(
                             color = Color.LightGray,
                             shape = RoundedCornerShape(12.dp)
                         ),
+                    trailingIcon = {
+                        Icon(
+                            painter = painterResource(id = if (passwordVisibility) R.drawable.eye else R.drawable.hideeye),
+                            contentDescription = "Password visibility icon",
+                            tint = Color.LightGray,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    },
                     shape = RoundedCornerShape(12.dp)
+                )
+                Text(
+                    text = "Forgot password?",
+                    fontWeight = FontWeight.SemiBold,
+                    textAlign = TextAlign.End,
+                    color = blue3,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 6.dp)
+
 
                 )
 
-
-
-
                 Button(
-                    onClick = {},
+                    onClick = {
+                        onLoginClick()
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(12.dp),
@@ -195,7 +178,7 @@ fun RegisterScreen(
                     )
                 ) {
                     Text(
-                        "Register",
+                        "Login",
                         fontWeight = FontWeight.Bold,
 
                         )
@@ -207,7 +190,7 @@ fun RegisterScreen(
                 )
                 Row {
                     Text(
-                        text = "New user?, Register",
+                        text = "ew user?, Register",
                         color = Color.LightGray
                     )
                     Text(text = " ")
@@ -217,28 +200,24 @@ fun RegisterScreen(
                         textAlign = TextAlign.End,
                         color = blue3,
                         textDecoration = TextDecoration.Underline,
+
                         modifier = Modifier
                             .clickable {
-                                onTextClick()
+                                onTextNowClick()
                             }
+
                     )
                 }
             }
         }
     }
+
 }
 
 @Preview(showBackground = true, name = "Login and Register Preview")
 @Composable
-fun RegisterPreview() {
+fun LoginScreenPreview() {
     Column {
-        RegisterScreen()
+        LoginScreen(onTextNowClick = {}, onLoginClick = {})
     }
 }
-
-
-
-
-
-
-

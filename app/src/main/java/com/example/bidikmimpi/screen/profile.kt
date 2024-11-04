@@ -7,8 +7,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,7 +21,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.draw.shadow
+import androidx.navigation.compose.rememberNavController
 import com.example.bidikmimpi.ui.theme.BidikmimpiTheme
+import com.example.bidikmimpi.ui.theme.LoginRegisterController
+
 
 class Profile : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,12 +32,19 @@ class Profile : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BidikmimpiTheme() {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                var selectedTab by remember { mutableStateOf(0) }
+
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = {
+                        BottomNavigationBar(selectedTab = selectedTab, onTabSelected = { selectedTab = it })
+                    }
+                ) { innerPadding ->
                     ProfileScreen(
                         name = "fufufafa",
-                        gmail = "fufufa@gmail.com",
+                        nim = "12345678",
                         jurusan = "Teknik Informatika",
-                        profileImageResId = R.drawable.eye,
+                        profileImageResId = R.drawable.user,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -37,10 +52,11 @@ class Profile : ComponentActivity() {
         }
     }
 }
+
 @Composable
 fun ProfileScreen(
     name: String,
-    gmail: String,
+    nim: String,
     jurusan: String,
     profileImageResId: Int,
     modifier: Modifier = Modifier
@@ -85,9 +101,9 @@ fun ProfileScreen(
                             .padding(bottom = 8.dp)
                     )
 
-
+                    // Menampilkan NIM dan Jurusan
                     ProfileItem(label = "Nama", value = name, labelColor = Color.Black, textColor = Color.Black)
-                    ProfileItem(label = "Gmail", value = gmail, labelColor = Color.Black, textColor = Color.Black)
+                    ProfileItem(label = "NIM", value = nim, labelColor = Color.Black, textColor = Color.Black)
                     ProfileItem(label = "Jurusan", value = jurusan, labelColor = Color.Black, textColor = Color.Black)
                 }
             }
@@ -126,9 +142,6 @@ fun ProfileScreen(
         }
     }
 }
-
-
-
 @Composable
 fun ProfileItem(label: String, value: String, labelColor: Color, textColor: Color) {
     Column(
@@ -151,15 +164,93 @@ fun ProfileItem(label: String, value: String, labelColor: Color, textColor: Colo
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun ProfileScreenPreview() {
-    BidikmimpiTheme {
-        ProfileScreen(
-            name = "Fufufafa",
-            gmail = "Fufufafa@gmail.com",
-            jurusan = "Teknik Informatika",
-            profileImageResId = R.drawable.eye
+fun BottomNavigationBar(selectedTab: Int, onTabSelected: (Int) -> Unit) {
+    NavigationBar(
+        containerColor = Color.White, // Background warna gelap
+        tonalElevation = 8.dp
+    ) {
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    Icons.Default.Home,
+                    contentDescription = "Beranda",
+                    modifier = Modifier.size(24.dp)
+                )
+            },
+            label = { Text("Beranda") },
+            selected = selectedTab == 0,
+            onClick = { onTabSelected(0) },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.Black,
+                unselectedIconColor = Color.Gray,
+                selectedTextColor = Color.Black,
+                unselectedTextColor = Color.Gray
+            )
+        )
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    Icons.Default.ThumbUp,
+                    contentDescription = "Notifikasi",
+                    modifier = Modifier.size(24.dp)
+                )
+            },
+            label = { Text("Notifikasi") },
+            selected = selectedTab == 1,
+            onClick = { onTabSelected(1) },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.Black,
+                unselectedIconColor = Color.Gray,
+                selectedTextColor = Color.Black,
+                unselectedTextColor = Color.Gray
+            )
+        )
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    Icons.Default.Person,
+                    contentDescription = "Profil",
+                    modifier = Modifier.size(24.dp)
+                )
+            },
+            label = { Text("Profil") },
+            selected = selectedTab == 2,
+            onClick = { onTabSelected(2) },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = Color.Black,
+                unselectedIconColor = Color.Gray,
+                selectedTextColor = Color.Black,
+                unselectedTextColor = Color.Gray
+            )
         )
     }
+}
+
+@Composable
+fun ProfileScreenWithScaffoldPreview() {
+    BidikmimpiTheme() {
+        var selectedTab by remember { mutableStateOf(2) }
+
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            bottomBar = {
+                BottomNavigationBar(selectedTab = selectedTab, onTabSelected = { selectedTab = it })
+            }
+        ) { innerPadding ->
+            ProfileScreen(
+                name = "Fufufafa",
+                nim = "2113020024",
+                jurusan = "Teknik Informatika",
+                profileImageResId = R.drawable.user,
+                modifier = Modifier.padding(innerPadding)
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProfileScreenWithScaffoldPreviewPreview() {
+    ProfileScreenWithScaffoldPreview()
 }
