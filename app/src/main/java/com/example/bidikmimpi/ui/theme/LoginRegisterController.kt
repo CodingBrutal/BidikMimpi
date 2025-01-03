@@ -34,11 +34,16 @@ fun LoginRegisterController(
                     },
                     onTextNowClick = {
                         navController.navigate(Screen.Register.name)
-                    }
+                    },
+
                 )
             }
             composable(Screen.Register.name) {
-                RegisterScreen()
+                RegisterScreen(
+                    onHaveAccountClick = {
+                        navController.navigate(Screen.Login.name)
+                    }
+                )
             }
             composable(Screen.Menu.name) {
                 DefaultPreview()

@@ -48,7 +48,8 @@ class LoginActivity : ComponentActivity() {
 @Composable
 fun LoginScreen(
     onLoginClick: () -> Unit = {},
-    onTextNowClick: () -> Unit = {}
+    onTextNowClick: () -> Unit = {},
+
 ) {
     // State untuk menyimpan input pengguna
     var email by remember { mutableStateOf("") }
@@ -186,7 +187,6 @@ fun LoginScreen(
                         "Login",
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily(Font(R.font.poppins_bold))
-
                         )
                 }
                 HorizontalDivider(

@@ -67,7 +67,8 @@ class registerActivity : ComponentActivity() {
 @Composable
 fun RegisterScreen(
     onRegisterClick: () -> Unit = {},
-    onTextClick: () -> Unit = {}
+    onTextClick: () -> Unit = {},
+    onHaveAccountClick: () -> Unit = {}
 ) {
 
     var email by remember { mutableStateOf("") }
@@ -224,7 +225,7 @@ fun RegisterScreen(
                         fontFamily = FontFamily(Font(R.font.poppins_bold)),
                         modifier = Modifier
                             .clickable {
-                                onTextClick()
+                                onHaveAccountClick()
                             }
                     )
                 }
