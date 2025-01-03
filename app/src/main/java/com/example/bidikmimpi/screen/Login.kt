@@ -27,6 +27,8 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.*
 import com.example.bidikmimpi.R
 import androidx.compose.runtime.*
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -61,7 +63,8 @@ fun LoginScreen(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally // Menyelaraskan konten di tengah secara horizontal
+        horizontalAlignment = Alignment.CenterHorizontally
+
     ) {
         Image(
             painter = painterResource(id = R.drawable.logo), // Menggunakan painterResource dengan id yang benar
@@ -94,9 +97,10 @@ fun LoginScreen(
                     text = "Login",
                     style = MaterialTheme.typography.headlineLarge.copy(
                         fontWeight = FontWeight.Bold,
-                        color = blue3
+                        color = blue3,
+                        fontFamily = FontFamily(Font(R.font.poppins_bold))
                     ),
-                    modifier = Modifier.padding(bottom = 20.dp, top = 5.dp),
+                    modifier = Modifier.padding(bottom = 20.dp, top = 5.dp)
 
                     )
 
@@ -156,6 +160,7 @@ fun LoginScreen(
                     fontWeight = FontWeight.SemiBold,
                     textAlign = TextAlign.End,
                     color = blue3,
+                    fontFamily = FontFamily(Font(R.font.poppins_regular)),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 6.dp)
@@ -180,6 +185,7 @@ fun LoginScreen(
                     Text(
                         "Login",
                         fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily(Font(R.font.poppins_bold))
 
                         )
                 }
@@ -190,8 +196,9 @@ fun LoginScreen(
                 )
                 Row {
                     Text(
-                        text = "ew user?, Register",
-                        color = Color.LightGray
+                        text = "new user?, Register",
+                        color = Color.LightGray,
+                        fontFamily = FontFamily(Font(R.font.poppins_regular))
                     )
                     Text(text = " ")
                     Text(
@@ -200,6 +207,7 @@ fun LoginScreen(
                         textAlign = TextAlign.End,
                         color = blue3,
                         textDecoration = TextDecoration.Underline,
+                        fontFamily = FontFamily(Font(R.font.poppins_bold)),
 
                         modifier = Modifier
                             .clickable {

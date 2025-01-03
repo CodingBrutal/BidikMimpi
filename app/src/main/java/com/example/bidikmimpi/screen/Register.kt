@@ -42,6 +42,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.colorspace.WhitePoint
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -109,7 +111,8 @@ fun RegisterScreen(
                     text = "Register",
                     style = MaterialTheme.typography.headlineLarge.copy(
                         fontWeight = FontWeight.Bold,
-                        color = blue3
+                        color = blue3,
+                        fontFamily = FontFamily(Font(R.font.poppins_bold))
                     ),
                     modifier = Modifier.padding(bottom = 20.dp, top = 5.dp),
 
@@ -207,8 +210,9 @@ fun RegisterScreen(
                 )
                 Row {
                     Text(
-                        text = "New user?, Register",
-                        color = Color.LightGray
+                        text = "Have Account?, Login ",
+                        color = Color.LightGray,
+                        fontFamily = FontFamily(Font(R.font.poppins_regular))
                     )
                     Text(text = " ")
                     Text(
@@ -217,6 +221,7 @@ fun RegisterScreen(
                         textAlign = TextAlign.End,
                         color = blue3,
                         textDecoration = TextDecoration.Underline,
+                        fontFamily = FontFamily(Font(R.font.poppins_bold)),
                         modifier = Modifier
                             .clickable {
                                 onTextClick()
