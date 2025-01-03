@@ -10,11 +10,13 @@ import androidx.navigation.compose.composable
 import com.example.bidikmimpi.screen.DefaultPreview
 import com.example.bidikmimpi.RegisterScreen
 import com.example.bidikmimpi.screen.LoginScreen
+import com.example.bidikmimpi.screen.ResetPass
 
 enum class Screen {
     Login,
     Register,
-    Menu
+    Menu,
+    ResetPass,
 }
 
 @Composable
@@ -35,6 +37,9 @@ fun LoginRegisterController(
                     onTextNowClick = {
                         navController.navigate(Screen.Register.name)
                     },
+                    onForgotPassClick = {
+                        navController.navigate(Screen.ResetPass.name)
+                    }
 
                 )
             }
@@ -47,6 +52,16 @@ fun LoginRegisterController(
             }
             composable(Screen.Menu.name) {
                 DefaultPreview()
+            }
+            composable(Screen.ResetPass.name) {
+                ResetPass(
+                    onLoginClick = {
+                        navController.navigate(Screen.Login.name)
+                    },
+                    onKirimOtpClick = {
+                        navController.navigate(Screen.ResetPass.name)
+                    }
+                )
             }
         }
     }

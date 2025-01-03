@@ -34,26 +34,26 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import com.example.bidikmimpi.ui.theme.blue3
 
-class LoginActivity : ComponentActivity() {
+class ResetPassActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             BidikmimpiTheme {
-                LoginScreen()
+                ResetPass()
             }
         }
     }
 }
 
 @Composable
-fun LoginScreen(
+fun ResetPass(
     onLoginClick: () -> Unit = {},
-    onTextNowClick: () -> Unit = {},
-    onForgotPassClick: () -> Unit = {},
+    onKirimOtpClick: () -> Unit = {},
+
 ) {
     // State untuk menyimpan input pengguna
     var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var otp by remember { mutableStateOf("") }
     val passwordVisibility by remember { mutableStateOf(false) }
     //val context = LocalContext.current
 
@@ -95,7 +95,7 @@ fun LoginScreen(
 
                 ) {
                 Text(
-                    text = "Login",
+                    text = "Reset Password",
                     style = MaterialTheme.typography.headlineLarge.copy(
                         fontWeight = FontWeight.Bold,
                         color = blue3,
@@ -128,9 +128,9 @@ fun LoginScreen(
                 )
 
                 OutlinedTextField(
-                    value = password,
-                    onValueChange = { password = it },
-                    placeholder = { Text("password", color = Color.LightGray) },
+                    value = otp,
+                    onValueChange = { otp = it },
+                    placeholder = { Text("kode otp", color = Color.LightGray) },
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Filled.Lock,
@@ -147,17 +147,17 @@ fun LoginScreen(
                             shape = RoundedCornerShape(12.dp)
                         ),
                     trailingIcon = {
-                        Icon(
-                            painter = painterResource(id = if (passwordVisibility) R.drawable.eye else R.drawable.hideeye),
-                            contentDescription = "Password visibility icon",
-                            tint = Color.LightGray,
-                            modifier = Modifier.size(24.dp)
-                        )
+//                        Icon(
+//                            painter = painterResource(id = if (passwordVisibility) R.drawable.eye else R.drawable.hideeye),
+//                            contentDescription = "Password visibility icon",
+//                            tint = Color.LightGray,
+//                            modifier = Modifier.size(24.dp)
+//                        )
                     },
                     shape = RoundedCornerShape(12.dp)
                 )
                 Text(
-                    text = "Forgot password?",
+                    text = "Kirim Otp?",
                     fontWeight = FontWeight.SemiBold,
                     textAlign = TextAlign.End,
                     color = blue3,
@@ -166,7 +166,7 @@ fun LoginScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 6.dp)
                         .clickable {
-                            onForgotPassClick()
+                            onKirimOtpClick()
                         }
 
 
@@ -187,37 +187,10 @@ fun LoginScreen(
                     )
                 ) {
                     Text(
-                        "Login",
+                        "Reset Password",
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily(Font(R.font.poppins_bold))
                         )
-                }
-                HorizontalDivider(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                    thickness = 1.dp,
-                    color = Color.LightGray
-                )
-                Row {
-                    Text(
-                        text = "new user?, Register",
-                        color = Color.LightGray,
-                        fontFamily = FontFamily(Font(R.font.poppins_regular))
-                    )
-                    Text(text = " ")
-                    Text(
-                        text = "Now",
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.End,
-                        color = blue3,
-                        textDecoration = TextDecoration.Underline,
-                        fontFamily = FontFamily(Font(R.font.poppins_bold)),
-
-                        modifier = Modifier
-                            .clickable {
-                                onTextNowClick()
-                            }
-
-                    )
                 }
             }
         }
@@ -227,8 +200,8 @@ fun LoginScreen(
 
 @Preview(showBackground = true, name = "Login and Register Preview")
 @Composable
-fun LoginScreenPreview() {
+fun ResetPassPreview() {
     Column {
-        LoginScreen(onTextNowClick = {}, onLoginClick = {}, onForgotPassClick = {})
+        ResetPass(onKirimOtpClick = {}, onLoginClick = {})
     }
 }
