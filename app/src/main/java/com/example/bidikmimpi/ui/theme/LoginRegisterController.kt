@@ -32,6 +32,7 @@ fun LoginRegisterController(
             composable(Screen.Login.name) {
                 LoginScreen(
                     onLoginClick = {
+
                         navController.navigate(Screen.Menu.name)
                     },
                     onTextNowClick = {
@@ -45,6 +46,9 @@ fun LoginRegisterController(
             }
             composable(Screen.Register.name) {
                 RegisterScreen(
+                    onRegisterClick = {
+                        navController.navigate(Screen.Login.name)
+                    },
                     onHaveAccountClick = {
                         navController.navigate(Screen.Login.name)
                     }
