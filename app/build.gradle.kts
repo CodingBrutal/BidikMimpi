@@ -47,7 +47,7 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-}
+}s
 
 dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
