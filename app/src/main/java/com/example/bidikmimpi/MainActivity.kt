@@ -12,6 +12,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.navigation.compose.rememberNavController
 import com.example.bidikmimpi.screen.LoginScreen
+import com.example.bidikmimpi.screen.MainApp
 import com.example.bidikmimpi.ui.theme.LoginRegisterController
 
 class MainActivity : ComponentActivity() {
@@ -19,9 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BidikmimpiTheme {
-                val navController = rememberNavController()
-                LoginRegisterController(navController = navController)
-            }
+                MainApp()            }
         }
     }
 }

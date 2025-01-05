@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.bidikmimpi.screen.DefaultPreview
+import com.example.bidikmimpi.screen.HomeScreen
 import com.example.bidikmimpi.RegisterScreen
 import com.example.bidikmimpi.screen.LoginScreen
 import com.example.bidikmimpi.screen.ResetPass
@@ -55,7 +55,7 @@ fun LoginRegisterController(
                 )
             }
             composable(Screen.Menu.name) {
-                DefaultPreview()
+                HomeScreen()
             }
             composable(Screen.ResetPass.name) {
                 ResetPass(
